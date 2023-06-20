@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Task } from "../../interfaces";
 import { useAppSelector } from "../../store/hooks";
 import Modal from "./Modal";
+import axios from "axios";
 
 const InputCheckbox: React.FC<{
   label: string;
@@ -48,6 +49,9 @@ const ModalCreateTask: React.FC<{
   const todayDate: string = year + "-" + month + "-" + day;
   const maxDate: string = year + 1 + "-" + month + "-" + day;
 
+  const baseURL = "http://127.0.0.1:8000/";
+
+
   const [description, setDescription] = useState<string>(() => {
     if (task) {
       return task.description;
@@ -92,6 +96,11 @@ const ModalCreateTask: React.FC<{
 
   const addNewTaskHandler = (event: React.FormEvent): void => {
     event.preventDefault();
+    console.log("d");
+
+    // axios.post(baseURL).then((response) => {
+    //   console.log(response.data);
+    // });
 
     isTitleValid.current = title.trim().length > 0;
     isDateValid.current = date.trim().length > 0;
